@@ -11,7 +11,7 @@ def call(body) {
 
             stage('database') {
                 steps {
-                    build job: '/FIRDS/library/firds-database', parameters: []
+                    build job: 'LIB/firds-database', parameters: []
                 }
             }
 
