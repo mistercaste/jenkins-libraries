@@ -25,7 +25,7 @@ def call(body) {
 
         post {
             failure {
-                mail to: pipelineParams.email, subject: 'Pipeline failed', body: "Blah"
+                mail to: pipelineParams.email, subject: 'Pipeline failed', body: "An error occurred"
             }
         }
     }
