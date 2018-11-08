@@ -17,22 +17,7 @@ def call(body) {
 
             stage('jboss-fuse') {
                 steps {
-                    echo "Performing build: [${pipelineParams.buildMessageSample}]"
-                }
-            }
-
-            stage ('test') {
-                steps {
-                    parallel (
-                            "unit tests": { sh "echo -e Unit tests message: ${pipelineParams.unitTestsMessage}" },
-                            "integration tests": { sh "echo -e Integration tests message: ${pipelineParams.integrationTestsMessage}" }
-                    )
-                }
-            }
-
-            stage('deploy'){
-                steps {
-                    echo "Performing deploy: [${pipelineParams.deployMessageSample}]"
+                    echo "JBOSS parameter (provided): [${pipelineParams.fuseParameter}]"
                 }
             }
 
