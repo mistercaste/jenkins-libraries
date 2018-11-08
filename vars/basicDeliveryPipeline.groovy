@@ -9,7 +9,13 @@ def call(body) {
         agent any
         stages {
 
-            stage('build') {
+            stage('database') {
+                steps {
+                    build job: './library/firds-database/master', parameters: []
+                }
+            }
+
+            stage('jboss-fuse') {
                 steps {
                     echo "Performing build: [${pipelineParams.buildMessageSample}]"
                 }
