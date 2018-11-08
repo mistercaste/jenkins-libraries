@@ -9,13 +9,13 @@ def call(body) {
         agent any
         stages {
 
-            stage('database') {
+            stage('jenkins-sample-database') {
                 steps {
                     build job: 'LIB/firds-database', parameters: []
                 }
             }
 
-            stage('jboss-fuse') {
+            stage('jenkins-sample-jboss-fuse') {
                 steps {
                     echo "JBOSS parameter (provided): [${pipelineParams.fuseParameter}]"
                 }
