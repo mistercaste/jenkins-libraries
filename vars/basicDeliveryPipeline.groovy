@@ -18,6 +18,7 @@ def call(body) {
             stage('jboss-fuse') {
                 steps {
                     echo "JBOSS parameter (provided): [${pipelineParams.fuseParameter}]"
+                    build job: '../LIB/firds-jboss-fuse', parameters: []
                 }
             }
 
