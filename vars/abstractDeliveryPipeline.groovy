@@ -18,7 +18,7 @@ def call(body) {
 
             stage('jboss-fuse') {
                 steps {
-                    sh "echo -e Stopping, updating and restarting container: [${pipelineParams.unitTestsMessage}]"
+                    sh "echo -e Stopping, updating and restarting container: [${pipelineParams.fuseContainer}]"
                 }
             }
 
