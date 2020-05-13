@@ -9,8 +9,8 @@ def call(body) {
     pipeline {
         agent any
         environment {
-            APPLICATION_FOLDER = '${pipelineParams.applicationFolder}'
-            BRANCH = '${pipelineParams.branch}'
+            APPLICATION_FOLDER = "${pipelineParams.applicationFolder}"
+            BRANCH = "${pipelineParams.branch}"
             SCM_URL = 'https://github.com/mistercaste/conference-app'
             MAVEN_GLOBAL_SETTINGS_ID = 'maven-global-settings'
             REPOSITORY_URL = 'http://nexus:8081/repository/maven-releases/'
