@@ -11,8 +11,8 @@ def call(body) {
         environment {
             APPLICATION_FOLDER = "${pipelineParams.applicationFolder}"
             BRANCH = "${pipelineParams.branch}"
+            MAVEN_GLOBAL_SETTINGS_ID = "${pipelineParams.mavenGlobalSettingsId}" ?: 'maven-global-settings'
             SCM_URL = 'https://github.com/mistercaste/conference-app'
-            MAVEN_GLOBAL_SETTINGS_ID = "${pipelineParams.mavenGlobalSettingsId} ?: 'maven-global-settings'"
             REPOSITORY_URL = 'http://nexus:8081/repository/maven-releases/'
         }
         parameters {
