@@ -9,20 +9,18 @@ def call(body) {
     pipeline {
         agent any
         environment {
-            APPLICATION_FOLDER = ${pipelineParams.applicationFolder}
-            BRANCH = ${pipelineParams.branch}
+            APPLICATION_FOLDER = '${pipelineParams.applicationFolder}'
+            BRANCH = '${pipelineParams.branch}'
             SCM_URL = 'https://github.com/mistercaste/conference-app'
             MAVEN_GLOBAL_SETTINGS_ID = 'maven-global-settings'
             REPOSITORY_URL = 'http://nexus:8081/repository/maven-releases/'
-            VERSION_MAVEN =  ${pipelineParams.versionMaven}
-            VERSION_JDK =  ${pipelineParams.versionJdk}
         }
         parameters {
             booleanParam(name: 'BUILD_DOCKER', defaultValue: false, description: 'Deploy to Docker?')
         }
         tools {
-            maven ${VERSION_MAVEN}
-            jdk ${VERSION_JDK}
+            maven 'Maven 3.3.3'
+            jdk 'JDK 8'
         }
         stages {
             stage('Checkout') {
