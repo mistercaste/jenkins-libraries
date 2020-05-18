@@ -54,13 +54,15 @@ def call(body) {
                 }
             }
             stage('Test') {
-                steps {
-                    step([$class    : 'XUnitPublisher',
-                          thresholds: [
-                                  [$class: 'FailedThreshold', failureNewThreshold: '', failureThreshold: '', unstableNewThreshold: '', unstableThreshold: ''],
-                                  [$class: 'SkippedThreshold', failureNewThreshold: '', failureThreshold: '', unstableNewThreshold: '', unstableThreshold: '']],
-                          tools     : [[$class: 'JUnitType', pattern: '**/target/surefire-reports/*.xml']]]
-                    )
+                when (APPLICATION_FOLDER == 'monitoring') {// skip: tests do not exist
+                    steps {
+                        step([$class    : 'XUnitPublisher',
+                              thresholds: [
+                                      [$class: 'FailedThreshold', failureNewThreshold: '', failureThreshold: '', unstableNewThreshold: '', unstableThreshold: ''],
+                                      [$class: 'SkippedThreshold', failureNewThreshold: '', failureThreshold: '', unstableNewThreshold: '', unstableThreshold: '']],
+                              tools     : [[$class: 'JUnitType', pattern: '**/target/surefire-reports/*.xml']]]
+                        )
+                    }
                 }
             }
             stage('Sonar') {
