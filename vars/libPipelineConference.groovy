@@ -1,3 +1,14 @@
+/*
+This pipeline makes a sample use of the https://github.com/mistercaste/conference-app
+In order to use it, please import this project in Jenkins as jenkins-lib, create a Pipeline Job and in the script section add the code below:
+
+@Library('jenkins-lib') _
+libPipelineConference {
+    applicationFolder = 'app'
+    branch = 'master'
+    mavenGlobalSettingsId = 'maven-global-settings'
+}
+ */
 def call(body) {
 
     // evaluate the body block, and collect configuration into the object
@@ -44,7 +55,7 @@ def call(body) {
             }
             stage('Test') {
                 steps {
-                    step([$class    : 'XUnitBuilder',
+                    step([$class    : 'XUnitPublisher',
                           thresholds: [
                                   [$class: 'FailedThreshold', failureNewThreshold: '', failureThreshold: '', unstableNewThreshold: '', unstableThreshold: ''],
                                   [$class: 'SkippedThreshold', failureNewThreshold: '', failureThreshold: '', unstableNewThreshold: '', unstableThreshold: '']],
