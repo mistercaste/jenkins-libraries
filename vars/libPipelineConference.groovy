@@ -77,27 +77,6 @@ def call(body) {
                     }
                 }
             }
-            stage('Docker Build') {
-                when {
-                    expression { params.BUILD_DOCKER == 'true' }
-                }
-                steps {
-                    sh 'echo "Building Docker Container . . ."'
-                    sh 'cd ${APPLICATION_FOLDER} && sudo /usr/bin/docker build -t conference-${APPLICATION_FOLDER} .'
-                    sh 'echo "Stopping Docker Container first"'
-                    sh 'sudo /usr/bin/docker stop $(sudo /usr/bin/docker ps -a -q --filter="name=conference-${APPLICATION_FOLDER}") | true '
-                    sh 'sudo /usr/bin/docker rm $(sudo /usr/bin/docker ps -a -q --filter="name=conference-${APPLICATION_FOLDER}") | true '
-                    sh 'echo "Starting Docker Container"'
-                    sh 'sudo /usr/bin/docker run -d --name conference-${APPLICATION_FOLDER} -p=48080:8080 conference-${APPLICATION_FOLDER}'
-                }
-            }
-/*
-        stage('Docker Stop') {
-            steps {
-                sh 'sudo /usr/bin/docker stop $(sudo /usr/bin/docker ps -a -q --filter="name=conference-${APPLICATION_FOLDER}")'
-                sh 'sudo /usr/bin/docker rm $(sudo /usr/bin/docker ps -a -q --filter="name=conference-${APPLICATION_FOLDER}")'
-        }
-*/
         }
     }
 }
