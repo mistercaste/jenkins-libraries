@@ -27,9 +27,6 @@ def call(body) {
             SCM_URL = 'https://github.com/mistercaste/conference-app'
             REPOSITORY_URL = 'http://nexus:8081/repository/maven-releases/'
         }
-        parameters {
-            booleanParam(name: 'BUILD_DOCKER', defaultValue: false, description: 'Deploy to Docker?')
-        }
         tools {
             maven 'Maven 3.3.3'
             jdk 'JDK 8'
