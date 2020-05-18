@@ -60,7 +60,12 @@ def call(body) {
                           thresholds: [
                                   [$class: 'FailedThreshold', failureNewThreshold: '', failureThreshold: '', unstableNewThreshold: '', unstableThreshold: ''],
                                   [$class: 'SkippedThreshold', failureNewThreshold: '', failureThreshold: '', unstableNewThreshold: '', unstableThreshold: '']],
-                          tools     : [[$class: 'JUnitType', pattern: '**/target/surefire-reports/*.xml', skipNoTestFiles: 'true']]]
+                          tools     : [[$class: 'JUnitType',
+                                        pattern: '**/target/surefire-reports/*.xml',
+                                        skipNoTestFiles: 'true',
+                                        failIfNotNew: 'true',
+                                        deleteOutputFiles: 'true',
+                                        stopProcessingIfError: 'true']]]
                     )
                 }
             }
