@@ -9,6 +9,7 @@ libPipelineConference {
     mavenGlobalSettingsId = 'maven-global-settings'
 }
  */
+
 def call(body) {
 
     // evaluate the body block, and collect configuration into the object
@@ -54,15 +55,16 @@ def call(body) {
                 }
             }
             stage('Test') {
-                when (APPLICATION_FOLDER == 'monitoring') {// skip: tests do not exist
-                    steps {
-                        step([$class    : 'XUnitPublisher',
-                              thresholds: [
-                                      [$class: 'FailedThreshold', failureNewThreshold: '', failureThreshold: '', unstableNewThreshold: '', unstableThreshold: ''],
-                                      [$class: 'SkippedThreshold', failureNewThreshold: '', failureThreshold: '', unstableNewThreshold: '', unstableThreshold: '']],
-                              tools     : [[$class: 'JUnitType', pattern: '**/target/surefire-reports/*.xml']]]
-                        )
-                    }
+                when {
+                    environment name: 'APPLICATION_FOLDER', value: 'app'// Only publish tests for the app
+                }
+                steps {
+                    step([$class    : 'XUnitPublisher',
+                          thresholds: [
+                                  [$class: 'FailedThreshold', failureNewThreshold: '', failureThreshold: '', unstableNewThreshold: '', unstableThreshold: ''],
+                                  [$class: 'SkippedThreshold', failureNewThreshold: '', failureThreshold: '', unstableNewThreshold: '', unstableThreshold: '']],
+                          tools     : [[$class: 'JUnitType', pattern: '**/target/surefire-reports/*.xml']]]
+                    )
                 }
             }
             stage('Sonar') {
