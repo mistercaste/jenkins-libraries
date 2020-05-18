@@ -55,15 +55,12 @@ def call(body) {
                 }
             }
             stage('Test') {
-                when {
-                    environment name: 'APPLICATION_FOLDER', value: 'app'// Only publish tests for the app
-                }
                 steps {
                     step([$class    : 'XUnitPublisher',
                           thresholds: [
                                   [$class: 'FailedThreshold', failureNewThreshold: '', failureThreshold: '', unstableNewThreshold: '', unstableThreshold: ''],
                                   [$class: 'SkippedThreshold', failureNewThreshold: '', failureThreshold: '', unstableNewThreshold: '', unstableThreshold: '']],
-                          tools     : [[$class: 'JUnitType', pattern: '**/target/surefire-reports/*.xml']]]
+                          tools     : [[$class: 'JUnitType', pattern: '**/target/surefire-reports/*.xml', skipNoTestFiles: 'true']]]
                     )
                 }
             }
